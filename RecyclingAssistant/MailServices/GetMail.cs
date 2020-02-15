@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using MailKit;
 using MailKit.Net.Imap;
 using MimeKit;
@@ -40,15 +41,58 @@ namespace RecyclingAssistant.MailServices
 
                     foreach (var item in msgs)
                     {
-                        return item.BodyParts.OfType<TextPart>().FirstOrDefault()?.Text;
+                        var emailMessage = item.BodyParts.OfType<TextPart>().FirstOrDefault()?.Text;
+
+                        string concat = string.Join("\n ", ReturnReceiptItems(emailMessage).ToArray());
+                        return GetUserZipCode(emailMessage) + "\n" + concat + emailMessage;
                     }
-                    return "";
                 }
+                return "";
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        private List<string> ReturnReceiptItems(string emailMessage)
+        {
+            List<string> receiptItems = new List<string>();
+            string[] lines = emailMessage.Split(
+            new[] { Environment.NewLine },
+            StringSplitOptions.None);
+
+            foreach (var line in lines)
+            {
+                if (line != null)
+                {
+                    if (line.Length > 4)
+                    {
+                        string str = line?.Substring(0, 4);
+
+                        char[] charArray = str.ToCharArray();
+                        if (char.IsUpper(charArray[2]) && char.IsUpper(charArray[3]))
+                        {
+                            receiptItems.Add(line);
+                        }
+                    }
+                }
+            }
+            return receiptItems;
+        }
+
+        private string GetUserZipCode(string emailMessage)
+        {
+            Regex regex = new Regex(@"\d{5}");
+
+            Match match = regex.Match(emailMessage);
+
+            if (match.Success)
+            {
+                return match.Value.ToString();
+            }
+            return null;
+        }
+
     }
 }
