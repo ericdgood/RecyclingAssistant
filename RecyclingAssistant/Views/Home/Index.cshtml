@@ -2,7 +2,145 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Recycling Assistant | Submit Your Receipt, Gert Where to Recycle</title>
+	<meta name="description" content="Recycling Assistant helps you search recycling intake facilities and services near you by providing an electronic receipt of items you want to recycle.">
+	
+	<meta charset="utf-8">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Eric">
+	<meta name="author" content="Florence">
+	<meta name="author" content="Garret">
+	<meta name="author" content="Ivette">
+	<meta name="author" content="Earth911">
+	<meta name="author" content="Orlando Developers">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+	<style>
+		/* CSS3 fallback for IE */
+		header, main, nav, footer, section, article, figure, figcaption, aside {display: block;}
+
+		* { box-sizing: border-box; }
+
+		/* COLORS */
+		/* #e0d8c8 rgb(224,216,200) Light grayish orange */
+		/* #9eae26 rgb(158,174,38)) Dark yellow [Olive tone] */
+		/* #649300 rgb(100,147,0) Dark green */
+		/* #8ead70 rgb(142,173,112) Mostly desaturated dark green */
+		/* #b8c9aa rgb(184,201,170) Grayish green */
+		/* #ffffff rgb(255,255,255) white */
+
+		h1 {
+			text-align: center;
+			font-size: 9vh;
+			color: green;
+			/* -webkit-text-stroke: 1px black; */
+			text-shadow: 5px 5px 25px #333333;
+			padding-top: 15px;
+		}
+		body {
+			/* background-color: #8ead70; */
+			color: black;
+			font-family: sans-serif;
+		}
+		footer {
+			text-align: center;
+		}
+		header a {
+			text-decoration: none;
+			/* color: white; */
+		}
+		img {
+			padding: 10px;
+		}
+		main {
+			font-size: 1.5em;
+			padding: 20px;
+		}
+		p {
+			padding: 10px;
+			/* margin: 10px; */
+		}
+		.img-receipt { 
+			max-width: 100%;
+			height: auto;
+		}
+		.img-earth911logo {
+			max-width: 40%;
+			height: auto;
+		}
+		.img-odevslogo {
+			max-width: 40%;
+			height: auto;
+		}
+		.img-recycleicon {
+			max-height: 100px;
+			display: inline;
+		}
+		#flex-container {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+		.flex-item1 {
+			flex: 7;
+		}
+		.flex-item2 {
+			flex: 3;
+		}
+		#wrapper { 
+			width: 75%;
+			margin-left: auto;
+			margin-right: auto;
+			/* background-color: #e0d8c8; */
+			background-image: linear-gradient(to bottom right, #e0d8c8, #8ead70);
+			border-radius: 5%;
+			/* box-shadow: -5px -5px 5px #e0d8c8; */
+		}
+		body {
+			background-color: #8ead70;	/* #DFDBE5; */
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 40' width='80' height='40'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M0 40a19.96 19.96 0 0 1 5.9-14.11 20.17 20.17 0 0 1 19.44-5.2A20 20 0 0 1 20.2 40H0zM65.32.75A20.02 20.02 0 0 1 40.8 25.26 20.02 20.02 0 0 1 65.32.76zM.07 0h20.1l-.08.07A20.02 20.02 0 0 1 .75 5.25 20.08 20.08 0 0 1 .07 0zm1.94 40h2.53l4.26-4.24v-9.78A17.96 17.96 0 0 0 2 40zm5.38 0h9.8a17.98 17.98 0 0 0 6.67-16.42L7.4 40zm3.43-15.42v9.17l11.62-11.59c-3.97-.5-8.08.3-11.62 2.42zm32.86-.78A18 18 0 0 0 63.85 3.63L43.68 23.8zm7.2-19.17v9.15L62.43 2.22c-3.96-.5-8.05.3-11.57 2.4zm-3.49 2.72c-4.1 4.1-5.81 9.69-5.13 15.03l6.61-6.6V6.02c-.51.41-1 .85-1.48 1.33zM17.18 0H7.42L3.64 3.78A18 18 0 0 0 17.18 0zM2.08 0c-.01.8.04 1.58.14 2.37L4.59 0H2.07z'%3E%3C/path%3E%3C/svg%3E");
+		}
+	</style>
+	
+</head>
+<body>
+	<div id="wrapper">
+		<header>
+			<a href="index.html"><h1>Recycling Assistant
+			<img class="img-recycleicon" src="/recycleicon.svg" alt="recycle icon and small plant" title="recycle icon and small plant">
+			</h1></a>
+		</header>
+			
+			
+			
+		<main id="flex-container">
+			<div class="flex-item1">
+				<p>This web app will allow you to search recycling intake facilities and services near you by providing an electronic receipt of items you want to recycle.</p>
+				
+				<p>If you do not already receive electronic receipts to your email, <a href="https://ww4.publix.com/products-services/e-receipts">sign up for Publix E-Receipts</a>.</p>
+				
+				<p>Just forward your receipt to <a href="mailto://HelpMe@RecyclingAssistant.info">HelpMe@RecyclingAssistant.info</a> and you will receive an emaill with a link to view where you can take your items for recycling near where you purchased them.</p>
+			</div>
+			
+			<div class="flex-item2">
+				<img class="img-receipt" src="/receipt1.png" alt="receipt" title="receipt you submit with items you want to recycle">
+			</div>
+
+		</main>
+
+
+			
+		<footer>
+			<p>A project born at the <a href="https://orlandodevs.com/">Orlando Developers</a> Hackathon 2020, in collaboration with <a href="https://search.earth911.com/">Earth911</a>.</p>
+			
+			<img class="img-earth911logo" src="/earth911logo_white.png" alt="Earth911 logo" title="Earth911 logo">
+			<img class="img-odevslogo" src="/odevs-logo.png" alt="Orlando Developers logo" title="Orlando Developers logo">
+		</footer>	
+	
+	
+	</div><!-- end wrapper -->
+</body>
+</html>
