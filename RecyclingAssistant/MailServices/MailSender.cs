@@ -1,4 +1,5 @@
 ﻿using MailKit.Net.Smtp;
+using MailKit.Security;
 using MimeKit;
 using System;
 using System.Collections.Generic;
@@ -90,25 +91,13 @@ namespace RecyclingAssistant.MailServices
         private async Task<SmtpClient> connectAsync()
         {
 
-            var _SMTPClient = new SmtpClient();
+            var smtp = new SmtpClient();
 
-            _SMTPClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
+            smtp.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-            var clientAddress = "smtp.office365.com";
-            var Port = "587";
-
-            await _SMTPClient.ConnectAsync(
-                clientAddress,
-                Convert.ToInt32(Convert.ToDouble(Port)),
-                MailKit.Security.SecureSocketOptions.StartTls
-                );
-
-            await _SMTPClient.AuthenticateAsync(
-                    "helpme@Cyber-Medics.com",
-                    @"*Jk-cq3""sKr6T]\h"
-                );
-
-            return _SMTPClient;
+            await smtp.ConnectAsync("smtp.office365.com", 587, SecureSocketOptions.StartTls);
+            await smtp.AuthenticateAsync("helpme@Cyber-Medics.com", @"*Jk-cq3""sKr6T]\h");
+            return smtp;
 
         }
     }
