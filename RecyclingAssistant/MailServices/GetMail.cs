@@ -24,7 +24,7 @@ namespace RecyclingAssistant.MailServices
                     client.Authenticate(
                         "helpme@Cyber-Medics.com",
                         @"*Jk-cq3""sKr6T]\h"
-                        );
+                    );
 
                     var inbox = client.Inbox;
                     inbox.Open(FolderAccess.ReadOnly);
