@@ -22,7 +22,7 @@ namespace RecyclingAssistant.Controllers
         [HttpGet("{zipCode}")]
         public async Task<ActionResult> GetZipDetails(string zipCode)
         {
-            var location = await _e911Serivce.GetZipMaterialsAndLocations(zipCode);
+            var location = await _e911Serivce.GetZipLocationDetails(zipCode);
 
             return Ok(location);
         }
