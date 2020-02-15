@@ -31,6 +31,7 @@ namespace RecyclingAssistant
             services.AddScoped<GetMail>();
             services.AddHttpClient<E911Service>();
             services.AddControllersWithViews();
+            services.AddScoped<MailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

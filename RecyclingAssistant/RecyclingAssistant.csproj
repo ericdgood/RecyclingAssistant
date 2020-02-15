@@ -3,11 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-
-  <ItemGroup>
-    <Folder Include="MailServices\" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MailKit" Version="2.5.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
