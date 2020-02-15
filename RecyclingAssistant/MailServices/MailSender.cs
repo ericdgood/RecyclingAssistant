@@ -10,9 +10,9 @@ namespace RecyclingAssistant.MailServices
 {
     public class MailSender
     {
-        public MimeMessage Send(List<string> TOs, string Subject, string Body, List<string> CCs = null, List<string> BCCs = null, string AttachBase64 = null, string AttachmentName = null)
+        public async Task<MimeMessage> SendAsync(List<string> TOs, string Subject, string Body, List<string> CCs = null, List<string> BCCs = null, string AttachBase64 = null, string AttachmentName = null)
         {
-            var _SMTPClient = connect();
+            var _SMTPClient = await connectAsync();
 
             CCs = CCs ?? new List<string>();
             BCCs = CCs ?? new List<string>();
@@ -57,16 +57,16 @@ namespace RecyclingAssistant.MailServices
 
             message.Body = bodyBuilder.ToMessageBody();
 
-            _SMTPClient.Send(message);
-            _SMTPClient.Disconnect(true);
+            await _SMTPClient.SendAsync(message);
+            await _SMTPClient.DisconnectAsync(true);
 
             return message;
 
         }
 
-        public void TestSend()
+        public async Task TestSendAsync()
         {
-            var _SMTPClient = connect();
+            var _SMTPClient = await connectAsync();
 
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Recycle Assistant"));
@@ -82,12 +82,12 @@ namespace RecyclingAssistant.MailServices
                     -- Joey"
             };
 
-            _SMTPClient.Send(message);
-            _SMTPClient.Disconnect(true);
+            await _SMTPClient.SendAsync(message);
+            await _SMTPClient.DisconnectAsync(true);
 
         }
 
-        private SmtpClient connect()
+        private async Task<SmtpClient> connectAsync()
         {
 
             var _SMTPClient = new SmtpClient();
@@ -97,10 +97,15 @@ namespace RecyclingAssistant.MailServices
             var clientAddress = "smtp.office365.com";
             var Port = "587";
 
-            _SMTPClient.Connect(
+            await _SMTPClient.ConnectAsync(
                 clientAddress,
                 Convert.ToInt32(Convert.ToDouble(Port)),
                 MailKit.Security.SecureSocketOptions.StartTls
+                );
+
+            await _SMTPClient.AuthenticateAsync(
+                    "helpme@Cyber-Medics.com",
+                    @"*Jk-cq3""sKr6T]\h"
                 );
 
             return _SMTPClient;

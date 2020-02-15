@@ -20,9 +20,9 @@ namespace RecyclingAssistant.Controllers
         }
 
         [HttpGet]
-        public ActionResult SendTest()
+        public async Task<ActionResult> SendTestAsync()
         {
-            _sender.TestSend();
+            await _sender.TestSendAsync();
 
             return Ok();
         }
