@@ -19,9 +19,11 @@ namespace RecyclingAssistant.Controllers
 
         // GET: api/values
         [HttpGet]
-        public ActionResult<string> GetMail()
+        public async Task<ActionResult<string>> GetMailAsync()
         {
-            return Ok(_getMail.GetHelpMeMail());
+            var ReceiptZip = await _getMail.GetHelpMeMailAsync();
+
+            return Ok(ReceiptZip);
         }
 
         //// GET api/values/5

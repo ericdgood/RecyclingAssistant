@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using MailKit;
 using MailKit.Net.Imap;
 using MimeKit;
+using RecyclingAssistant.Controllers;
+using RecyclingAssistant.Earth911Servies;
+using RecyclingAssistant.Earth911Servies.models;
+using RecyclingAssistant.MailServices.model;
 
 namespace RecyclingAssistant.MailServices
 {
     public class GetMail
     {
+        private E911Service _earth911service;
+
         public GetMail()
         {
+            _earth911service = new E911Service(new HttpClient());
         }
 
-        public virtual string GetHelpMeMail()
+        public async Task<DisplayObject> GetHelpMeMailAsync()
         {
+
             try
             {
                 using (var client = new ImapClient())
@@ -39,15 +49,28 @@ namespace RecyclingAssistant.MailServices
 
                     client.Disconnect(true);
 
-                    foreach (var item in msgs)
+                    foreach (var email in msgs)
                     {
-                        var emailMessage = item.BodyParts.OfType<TextPart>().FirstOrDefault()?.Text;
+                        var emailMessage = email.BodyParts.OfType<TextPart>().FirstOrDefault()?.Text;
+                        List<RecycProgramDetails> programs = new List<RecycProgramDetails>();
 
-                        string concat = string.Join("\n ", ReturnReceiptItems(emailMessage).ToArray());
-                        return GetUserZipCode(emailMessage) + "\n" + concat + emailMessage;
+                        var receiptItems = ReturnReceiptItems(emailMessage);
+                        var zip = GetUserZipCode(emailMessage);
+                        var zipResults = await _earth911service.GetZipLocationDetails(zip);
+
+                        foreach (var result in zipResults.result)
+                        {
+                            programs.Add(result.Value);
+                        }
+
+                        return new DisplayObject()
+                        {
+                            Programs = programs,
+                            ReceiptItems = receiptItems
+                        };
                     }
                 }
-                return "";
+                return null;
             }
             catch (Exception ex)
             {
