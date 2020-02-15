@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RecyclingAssistant.Views.Home
+namespace RecyclingAssistant.Views.Response
 {
     public class IndexModel : PageModel
     {
