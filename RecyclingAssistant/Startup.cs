@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RecyclingAssistant.Earth911Servies;
 using RecyclingAssistant.MailServices;
 
 namespace RecyclingAssistant
@@ -28,6 +29,7 @@ namespace RecyclingAssistant
         {
             services.AddControllers();
             services.AddScoped<GetMail>();
+            services.AddHttpClient<E911Service>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
