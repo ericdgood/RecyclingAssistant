@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Response Page";
 }
-@model List<RecyclingAssistant.Earth911Servies.models.RecycProgramDetails>
+@model List<RecyclingAssistant.Controllers.ViewModel>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -143,30 +143,31 @@
 
                 @foreach (var item in Model)
                 {
-                    <p>
-                        @if (item.url != "")
-                        {
-                            <a href="@Html.DisplayFor(modelItem => item.url)" target="_blank"> @Html.DisplayFor(modelItem => item.description) </a>
+            <p>
+                @if (item.Program.url != "")
+                {
+                    <a href="@Html.DisplayFor(modelItem => item.Program.url)" target="_blank"> @Html.DisplayFor(modelItem => item.Program.description) </a>
 
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => item.description)
-                        }
-                        <br>
-                        @Html.DisplayFor(modelItem => item.address) <br>
-                        @Html.DisplayFor(modelItem => item.city), @Html.DisplayFor(modelItem => item.province) @Html.DisplayFor(modelItem => item.postal_code)
-                        <br>
-                        Item Types Accepted
-                        <ul>
-
-                            @foreach (var mat in item.materials)
-                            {
-                                <li>@Html.DisplayFor(modelItem => mat.description)</li>
-                            }
-                        </ul>
-                    </p>
                 }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Program.description)
+                }
+                <br>
+                @Html.DisplayFor(modelItem => item.Program.address) <br>
+                @Html.DisplayFor(modelItem => item.Program.city), @Html.DisplayFor(modelItem => item.Program.province) @Html.DisplayFor(modelItem => item.Program.postal_code)<br>
+                @Html.DisplayFor(modelItem => item.Program.phone) <br>
+                Note: @Html.DisplayFor(modelItem => item.Program.notes) <br>
+                <br>
+                Receipt Items Accepted:
+                <ul>
+                    @foreach (var mat in item.ReceiptItems)
+                    {
+                        <li>@Html.DisplayFor(modelItem => mat)</li>
+                    }
+                </ul>
+            </p>
+                    }
             </div>
 
             @*<div class="flex-item2">
